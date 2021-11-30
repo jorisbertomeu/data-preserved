@@ -17,7 +17,7 @@ Before you begin, ensure you have met the following requirements:
 To install data-preserved, follow these steps:
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Using Data-Preserved
