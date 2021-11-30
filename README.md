@@ -6,10 +6,10 @@ Script allowing to blur the most sensitive information on images.
 
 Before you begin, ensure you have met the following requirements:
 * You have installed the latest version of Tesseract :
-  * https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w32-setup-v5.0.0-rc1.20211030.exe (Windows 32 bits)
-  * https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-rc1.20211030.exe (Windows 64 bits)
-  * ```sudo apt install tesseract-ocr (Debian)```
-  * ```brew install tesseract (MacOS)```
+  * [Windows 32 bits](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w32-setup-v5.0.0-rc1.20211030.exe)
+  * [Windows 64 bits](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-rc1.20211030.exe)
+  * ```sudo apt install tesseract-ocr``` (Debian)
+  * ```brew install tesseract``` (MacOS)
 * Python >= 3.6
 
 ## Installing Data-Preserved
