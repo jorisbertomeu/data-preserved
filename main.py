@@ -22,6 +22,7 @@ PATTERN_IP_V6 = """(?:(?:(?:[0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]
 
 parser = ArgumentParser(description="Hide sensitive information in images")
 parser.add_argument("path", metavar="FILE", type=str, help="Image path to anonymize")
+parser.add_argument("-b", "--bin", metavar="", type=str, default=None, help="Tesseract binary path")
 parser.add_argument("-p", "--phone", action="store_true", default=False, help="Anonymize phone numbers")
 parser.add_argument("-m", "--mail", action="store_true", default=False, help="Anonymize email addresses")
 parser.add_argument("-4", "--ipv4", action="store_true", default=False, help="Anonymize IPv4")
@@ -32,17 +33,19 @@ args = parser.parse_args()
 
 # Initialisation de Tesseract
 
-if exists(TESSERACT_WIN_64):
+if args.bin and exists(args.bin):
+    pytesseract.tesseract_cmd = args.bin
+elif exists(TESSERACT_WIN_64):
     pytesseract.tesseract_cmd = TESSERACT_WIN_64
 elif exists(TESSERACT_WIN_86):
     pytesseract.tesseract_cmd = TESSERACT_WIN_86
 else:
-    print("Please install Tesseract")
+    print("Please install Tesseract or indicate the path")
 
  # Extraction du texte
 
 positions = []
-data = image_to_data(Image.open(args.path).convert("L"))
+data = image_to_data(Image.open(args.path))
 for l in data.splitlines():
     e = l.split("\t")
     if match(PATTERN_MAIL, e[-1]) and (args.mail or args.all):
@@ -75,7 +78,7 @@ ext = basename(args.path).split(".")[-1]
 if not args.output:
     path = join(dirname(args.path), f"{name}.edited.{ext}")
 else:
-    path = join(args.output, f"{name}.edited.{ext}")
+    path = join(args.output, f"{name}.{ext}")
 
 imwrite(path, img)
 print(f"Saved in {path}")
